@@ -1,0 +1,48 @@
+# Deploy to cPanel over FTP on every push to main.
+#
+# Only CHANGED files are transferred. The action keeps a state file
+# (.ftp-deploy-sync-state.json) in the web root and diffs against it, so the
+# first run uploads the whole site (~185 MB, slow, once) and every run after
+# that moves only what you actually edited — normally a few KB.
+#
+# Required repository secrets (Settings > Secrets and variables > Actions):
+#   FTP_SERVER    e.g. ftp.raybonchemicals.com
+#   FTP_USERNAME  the cPanel FTP user
+#   FTP_PASSWORD  that user's password
+name: Deploy to cPanel
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:      # lets you trigger a deploy by hand from the Actions tab
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      - name: Sync changed files over FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+
+          # cPanel web root. If your host puts the site somewhere else,
+          # change this to match (some use ./www/ or ./httpdocs/).
+          server-dir: ./public_html/
+
+          # Never push these to the live server.
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/.github/**
+            **/.DS_Store
+            **/include/config.php
+            **/include/config.sample.php
+            translation-review.csv
+            **/*.zip
+            **/*.bak
+            README.md

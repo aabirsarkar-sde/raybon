@@ -1,0 +1,17 @@
+# Live configuration — holds SMTP credentials. Never commit.
+include/config.php
+
+# macOS
+.DS_Store
+**/.DS_Store
+
+# Working files that are not part of the site
+translation-review.csv
+*.zip
+*.bak
+*.log
+error_log
+
+# Local build/scratch output
+*.png.bak
+/scratch/
