@@ -178,6 +178,20 @@ require_once 'include/page-meta.php';
 
                                    <!-- <h5>Product Brochure</h5>-->
 
+                                   <h5>The flocculant ranges we supply</h5>
+
+                                   <p>Raybon Chemicals is an authorised distributor for the flocculant ranges below. Grade selection is made against your sludge and equipment rather than from a catalogue &mdash; see the individual brand pages for detail.</p>
+
+                                   <ul>
+                                       <li><a href="zetag.php"><strong>ZETAG</strong></a> &mdash; high and ultra-high molecular weight cationic and anionic flocculants, powder and emulsion</li>
+                                       <li><a href="praestol.php"><strong>PRAESTOL</strong></a> &mdash; cationic, anionic and non-ionic flocculants for dewatering, thickening and clarification</li>
+                                       <li><a href="magnafloc.php"><strong>MAGNAFLOC</strong></a> &mdash; flocculants and coagulants for water treatment and mineral processing</li>
+                                       <li><strong>DREWFLOC</strong> &mdash; flocculants for industrial and municipal wastewater treatment</li>
+                                       <li><strong>AMERFLOC</strong> &mdash; flocculants for solid&ndash;liquid separation and clarification duty</li>
+                                   </ul>
+
+                                   <p>Running a different brand? See the <a href="flocculant-cross-reference.php">flocculant cross-reference guide</a>.</p>
+
                                    <h5>Other names for polyelectrolytes</h5>
 
                                    <p>Polyelectrolytes are polymers whose repeating units carry an electrolyte group. They destabilise a colloidal suspension and initiate flocculation, and are sold under a number of trade descriptions depending on the duty they perform &mdash; <strong>flocculant</strong> or <strong>flocculent</strong>, <strong>flocculating agent</strong>, <strong>settling agent</strong>, <strong>clarifying agent</strong>, <strong>thickening agent</strong>, and the abbreviations <strong>DWPE</strong> (dewatering polyelectrolyte) and <strong>DOPE</strong> (de-oiling polyelectrolyte). These describe the same family of products applied at different stages of water and wastewater treatment, not different chemistries.</p>
