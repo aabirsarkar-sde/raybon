@@ -6,7 +6,10 @@
 # that moves only what you actually edited — normally a few KB.
 #
 # Required repository secrets (Settings > Secrets and variables > Actions):
-#   FTP_SERVER    e.g. ftp.raybonchemicals.com
+#   FTP_SERVER    The hosting server's IP or provider hostname — NOT
+#                 ftp.raybonchemicals.com. DNS for this domain is on
+#                 Cloudflare, which does not carry FTP, and no `ftp` record
+#                 exists. Use the Shared IP Address shown in cPanel.
 #   FTP_USERNAME  the cPanel FTP user
 #   FTP_PASSWORD  that user's password
 name: Deploy to cPanel
@@ -29,6 +32,12 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
+
+          # cPanel reports "FTP & explicit FTPS port: 21", so the server speaks
+          # explicit FTPS. Using it keeps the password off the wire in clear text.
+          # If the host turns out not to support it, change this to: ftp
+          protocol: ftps
+          port: 21
 
           # cPanel web root. If your host puts the site somewhere else,
           # change this to match (some use ./www/ or ./httpdocs/).
