@@ -12,7 +12,7 @@
 
 // Google Analytics 4 measurement ID, e.g. 'G-XXXXXXXXXX'.
 // Analytics > Admin > Data streams > your web stream.
-define('RB_GA4_ID', '');
+define('RB_GA4_ID', 'G-62N98ZHJMH');
 
 // Google Search Console HTML-tag verification code. Paste ONLY the content
 // value, not the whole <meta> tag — e.g. for
