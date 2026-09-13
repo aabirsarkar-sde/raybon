@@ -1,0 +1,199 @@
+/* =============================================================
+   Raybon Chemicals — language switcher + Indic script support.
+   Linked from include/head-meta.php, so it loads on every page.
+   ============================================================= */
+
+/* ---- Language switcher in the header info bar ---------------- */
+.rb-langswitch {
+    white-space: nowrap;
+}
+
+.rb-langswitch .rb-lang {
+    color: inherit;
+    text-decoration: none;
+    opacity: .7;
+    transition: opacity .2s ease, color .2s ease;
+}
+
+.rb-langswitch .rb-lang:hover,
+.rb-langswitch .rb-lang:focus {
+    opacity: 1;
+    color: #2b5699;
+}
+
+.rb-langswitch .rb-lang.is-active {
+    opacity: 1;
+    font-weight: 600;
+    color: #2b5699;
+}
+
+.rb-langswitch .rb-lang-sep {
+    opacity: .35;
+    margin: 0 5px;
+}
+
+/* -------------------------------------------------------------
+   Language switcher position.
+
+   It originally went into .ttm-top-info-con beside Call and Email. That row
+   is a float pair (logo left, info right) sized for exactly two items — a
+   third pushed it past the container width and it wrapped BELOW the logo,
+   leaving a tall empty band across the header. Making the wrapper flex only
+   moved the wrap inside the info block.
+
+   So the switcher lives in the nav bar's .ttm-rt-contact instead, which is
+   absolutely positioned and has real free space between the menu and the
+   two buttons. The header row is left exactly as the theme built it.
+   ------------------------------------------------------------- */
+.ttm-rt-contact .rb-langswitch {
+    float: left;
+    margin: 0 22px 0 0;
+    padding: 0;
+    font-size: 13px;
+    line-height: 60px;
+    white-space: nowrap;
+    color: #091830;
+}
+
+.ttm-rt-contact .rb-langswitch .rb-lang-globe {
+    margin-right: 7px;
+    opacity: .55;
+    font-size: 14px;
+    vertical-align: -1px;
+}
+
+/* Divider matching the one the theme draws between the two buttons. */
+.ttm-rt-contact .rb-langswitch:after {
+    content: "";
+    position: absolute;
+    top: 18px;
+    height: 24px;
+    width: 1px;
+    background-color: rgba(0, 0, 0, .12);
+    margin-left: 22px;
+}
+
+@media (max-width: 1199px) {
+    /* The nav collapses to a burger here and .ttm-rt-contact gets tight, so
+       drop the divider and run the switcher in tighter. */
+    .ttm-rt-contact .rb-langswitch {
+        margin-right: 12px;
+        font-size: 12px;
+    }
+    .ttm-rt-contact .rb-langswitch:after {
+        content: none;
+    }
+}
+
+@media (max-width: 767px) {
+    /* Below the burger breakpoint the two buttons are already hidden by the
+       theme; give the switcher its own centred strip so it stays reachable. */
+    .ttm-rt-contact .rb-langswitch {
+        float: none;
+        display: block;
+        margin: 0;
+        text-align: center;
+        line-height: 40px;
+    }
+}
+
+/* =============================================================
+   Devanagari (Hindi) and Gujarati.
+
+   Both scripts carry vowel marks above and below the baseline, so the
+   theme's tight line-heights clip them. These rules restore headroom
+   and swap in a script-appropriate face, scoped by <html lang>.
+   ============================================================= */
+
+html[lang="hi"] body,
+html[lang="hi"] .rb-langswitch .rb-lang[lang="hi"] {
+    font-family: "Noto Sans Devanagari", "Nirmala UI", "Mangal", sans-serif;
+}
+
+html[lang="gu"] body,
+html[lang="gu"] .rb-langswitch .rb-lang[lang="gu"] {
+    font-family: "Noto Sans Gujarati", "Nirmala UI", "Shruti", sans-serif;
+}
+
+/* Always render each switcher label in its own script, whatever the page
+   language is — otherwise "ગુજરાતી" falls back to a system face on the
+   English pages and renders inconsistently. */
+.rb-langswitch .rb-lang[lang="hi"] {
+    font-family: "Noto Sans Devanagari", "Nirmala UI", "Mangal", sans-serif;
+}
+
+.rb-langswitch .rb-lang[lang="gu"] {
+    font-family: "Noto Sans Gujarati", "Nirmala UI", "Shruti", sans-serif;
+}
+
+html[lang="hi"],
+html[lang="gu"] {
+    /* Theme headings sit at line-height 1.2, which clips matras. */
+}
+
+html[lang="hi"] h1, html[lang="gu"] h1,
+html[lang="hi"] h2, html[lang="gu"] h2,
+html[lang="hi"] h3, html[lang="gu"] h3,
+html[lang="hi"] h4, html[lang="gu"] h4,
+html[lang="hi"] h5, html[lang="gu"] h5,
+html[lang="hi"] h6, html[lang="gu"] h6 {
+    line-height: 1.45;
+}
+
+html[lang="hi"] p, html[lang="gu"] p,
+html[lang="hi"] li, html[lang="gu"] li {
+    line-height: 1.85;
+}
+
+/* Exception: the theme vertically centres the header's Call/Email boxes by
+   inheriting a 121.5px line-height onto the <li>. The blanket `li` rule above
+   overwrote that, collapsing the box from 121.5px to its 69px content height
+   and floating it above the logo's centre line. Hand those <li>s back the
+   inherited value; the h5/p inside keep the theme's own metrics. */
+html[lang="hi"] .ttm-top-info-con > ul > li,
+html[lang="gu"] .ttm-top-info-con > ul > li {
+    line-height: inherit;
+}
+
+html[lang="hi"] .ttm-top-info-con .title-box h5,
+html[lang="gu"] .ttm-top-info-con .title-box h5 {
+    line-height: 19px;
+}
+
+html[lang="hi"] .ttm-top-info-con .title-box p,
+html[lang="gu"] .ttm-top-info-con .title-box p {
+    line-height: 20px;
+}
+
+/* Indic text runs roughly 15-20% longer than the English source. Buttons and
+   nav items in this theme are sized to their English labels, so let them grow
+   instead of overflowing. */
+html[lang="hi"] .ttm-custombutton a,
+html[lang="gu"] .ttm-custombutton a,
+html[lang="hi"] .ttm-btn,
+html[lang="gu"] .ttm-btn {
+    white-space: normal;
+    line-height: 1.5;
+    height: auto;
+}
+
+html[lang="hi"] #menu .dropdown > li > a,
+html[lang="gu"] #menu .dropdown > li > a {
+    padding-left: 12px;
+    padding-right: 12px;
+}
+
+/* Uppercase transforms are meaningless in both scripts and only break
+   shaping of conjunct characters. */
+html[lang="hi"] *,
+html[lang="gu"] * {
+    text-transform: none !important;
+}
+
+/* Letter-spacing likewise breaks conjuncts and matra positioning. */
+html[lang="hi"] h1, html[lang="gu"] h1,
+html[lang="hi"] h2, html[lang="gu"] h2,
+html[lang="hi"] h3, html[lang="gu"] h3,
+html[lang="hi"] .ttm-btn, html[lang="gu"] .ttm-btn {
+    letter-spacing: normal;
+}

@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+Disallow: /include/
+Disallow: /contact-form-handler.php
+Disallow: /contact-form-thank-you.html
+Disallow: /contact-form-thank-you.php
+
+Sitemap: https://www.raybonchemicals.com/sitemap.xml

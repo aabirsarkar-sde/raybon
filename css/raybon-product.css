@@ -1,0 +1,136 @@
+/* =============================================================
+   Raybon — product page components (rb- prefix)
+   Specification tables, selection guides and enquiry CTAs used by
+   the polyelectrolyte, brand and application pages.
+   ============================================================= */
+
+/* Wide tables must scroll inside their own box, never push the page
+   sideways on a phone. */
+.rb-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin: 22px 0 10px;
+}
+
+table.rb-spec {
+    width: 100%;
+    min-width: 560px;
+    border-collapse: collapse;
+    font-size: 15px;
+    line-height: 1.5;
+    background: #fff;
+}
+
+table.rb-spec thead th {
+    background: #2b5699;
+    color: #fff;
+    font-weight: 600;
+    text-align: left;
+    padding: 12px 14px;
+    border: 1px solid #24487f;
+    white-space: nowrap;
+}
+
+table.rb-spec tbody td {
+    padding: 11px 14px;
+    border: 1px solid #e1e6ee;
+    vertical-align: top;
+    color: #4a5568;
+}
+
+table.rb-spec tbody tr:nth-child(even) td {
+    background: #f6f8fb;
+}
+
+table.rb-spec tbody tr:hover td {
+    background: #eef3fb;
+}
+
+table.rb-spec tbody td:first-child {
+    font-weight: 600;
+    color: #2d3748;
+}
+
+/* Enquiry block that closes each product page. */
+.rb-cta {
+    margin: 34px 0 18px;
+    padding: 26px 28px;
+    background: #f6f8fb;
+    border: 1px solid #e1e6ee;
+    border-left: 4px solid #2b5699;
+    border-radius: 3px;
+}
+
+.rb-cta h5 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #2b5699;
+}
+
+.rb-cta p {
+    margin-bottom: 12px;
+}
+
+.rb-cta p:last-child {
+    margin-bottom: 0;
+}
+
+.rb-cta-btn {
+    display: inline-block;
+    padding: 11px 24px;
+    background: #2b5699;
+    color: #fff !important;
+    font-weight: 600;
+    border-radius: 3px;
+    text-decoration: none;
+    transition: background .2s ease;
+}
+
+.rb-cta-btn:hover,
+.rb-cta-btn:focus {
+    background: #3263f1;
+    color: #fff !important;
+    text-decoration: none;
+}
+
+/* Trademark attribution — present but visually quiet. */
+.rb-tm-note {
+    margin-top: 26px;
+    padding-top: 16px;
+    border-top: 1px solid #e1e6ee;
+    color: #8a94a6;
+    line-height: 1.6;
+}
+
+.rb-tm-note small {
+    font-size: 12.5px;
+}
+
+@media (max-width: 767px) {
+    .rb-cta {
+        padding: 20px 18px;
+    }
+    table.rb-spec {
+        font-size: 14px;
+    }
+}
+
+/* ---- Grouped sidebar navigation ---------------------------- */
+/* The product list outgrew a single flat column; grouping it keeps
+   each section scannable without hiding anything from crawlers. */
+.rb-aside-nav .widget-title {
+    margin-top: 26px;
+    margin-bottom: 10px;
+    font-size: 15px;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    color: #2b5699;
+}
+
+.rb-aside-nav .widget-title:first-child {
+    margin-top: 0;
+}
+
+.rb-aside-nav .widget-menu {
+    margin-bottom: 0;
+}

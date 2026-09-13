@@ -1,0 +1,99 @@
+# =============================================================
+# Raybon Chemicals — server configuration
+# =============================================================
+
+# ---- Directory listings -------------------------------------
+Options -Indexes
+
+# ---- Default document ---------------------------------------
+DirectoryIndex index.php index.html
+
+# ---- Block access to sensitive paths ------------------------
+
+# PHP includes, config and the mailer library are never requested directly.
+RedirectMatch 404 ^/include(/.*)?$
+
+<FilesMatch "\.(zip|rar|tar|gz|bak|sql|log|docx|xlsx|env|ini|md|sample\.php)$">
+    Require all denied
+</FilesMatch>
+
+# Dotfiles: .htaccess, .DS_Store, .git, editor leftovers
+<FilesMatch "^\.">
+    Require all denied
+</FilesMatch>
+
+<FilesMatch "(^error_log$|~$|\.swp$)">
+    Require all denied
+</FilesMatch>
+
+# ---- Security headers ---------------------------------------
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-Frame-Options "SAMEORIGIN"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+    # Remove the PHP version banner
+    Header always unset X-Powered-By
+</IfModule>
+
+# Do not advertise the PHP version
+<IfModule mod_php.c>
+    php_flag expose_php off
+    php_flag display_errors off
+    php_flag log_errors on
+</IfModule>
+
+# ---- Canonical host + HTTPS ---------------------------------
+# Keeps one canonical origin so the rel=canonical tags are not fighting
+# duplicate http:// and non-www variants.
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    RewriteCond %{HTTPS} !=on
+    RewriteRule ^(.*)$ https://www.raybonchemicals.com/$1 [R=301,L]
+
+    RewriteCond %{HTTP_HOST} !^www\. [NC]
+    RewriteRule ^(.*)$ https://www.raybonchemicals.com/$1 [R=301,L]
+
+    # ---- Language prefixes ----------------------------------
+    # /hi/product.php and /gu/product.php are real, indexable URLs that
+    # rewrite internally (no redirect) to the English file with ?lang= set.
+    #
+    # Asset paths in the page templates are relative ("./contact_files/x.css"),
+    # so a browser on /hi/ asks for /hi/contact_files/x.css. This first rule
+    # maps those back to the real directories. It must come first.
+
+    RewriteRule ^(?:hi|gu)/(contact_files|images|css|js|fonts)/(.*)$ /$1/$2 [L]
+
+    # The language home MUST keep its trailing slash. Without it a browser on
+    # /hi resolves the template's relative "product.php" to /product.php and
+    # silently drops the visitor back into English.
+    RewriteRule ^(hi|gu)$ /$1/ [R=301,L]
+
+    RewriteRule ^(hi|gu)/$ index.php?lang=$1 [L,QSA]
+    RewriteRule ^(hi|gu)/([A-Za-z0-9_-]+)\.php$ $2.php?lang=$1 [L,QSA]
+</IfModule>
+
+# ---- Caching ------------------------------------------------
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType image/jpeg              "access plus 1 year"
+    ExpiresByType image/png               "access plus 1 year"
+    ExpiresByType image/svg+xml           "access plus 1 year"
+    ExpiresByType image/webp              "access plus 1 year"
+    ExpiresByType text/css                "access plus 1 month"
+    ExpiresByType application/javascript  "access plus 1 month"
+    ExpiresByType font/woff2              "access plus 1 year"
+    ExpiresByType application/font-woff   "access plus 1 year"
+</IfModule>
+
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml \
+        application/javascript application/json image/svg+xml
+</IfModule>
+
+# ---- Retired product pages ----------------------------------
+# Chitosan and Sodium Metabisulpfite already 301 in PHP; these are here so
+# the redirect survives even if the stub files are ever removed.
+Redirect 301 /chitosan.html /product.php
+Redirect 301 /sodium-metabisulpfite.html /product.php

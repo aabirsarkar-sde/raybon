@@ -1,0 +1,861 @@
+/* =========================================================
+   Raybon — home page additions
+   Hero banner (text left / image right), contact strip,
+   proof bar, capability statement, technology partners, closing CTA.
+   ========================================================= */
+
+:root {
+    --rb-skin: #2b5699;
+    --rb-skin-dark: #144185;
+    --rb-ink: #091830;
+}
+
+/* ---------------------------------------------------------
+   0. Section order fixes
+   --------------------------------------------------------- */
+
+/* shortcodes.css pulls the first .ttm-row inside .site-main up by 92px
+   (it was written for a page that opened with a spacer band). The product
+   grid now sits in that slot, so it needs the pull cancelled and real
+   breathing room under the hero. */
+body .page .site-main > .ttm-row.portfolio-section2:first-child {
+    margin-top: 0 !important;
+    padding-top: 65px;
+}
+
+/* --- highlight strip behind the product-section heading --------------- */
+
+.rb-banner-strip {
+    position: relative;
+    margin-bottom: 45px;
+    padding: 32px 40px;
+    background: #eef3fa;
+    border-left: 5px solid var(--rb-skin);
+}
+
+.rb-banner-strip .section-title.style2 {
+    margin-bottom: 0;
+}
+
+.rb-banner-strip .section-title.style2 h2,
+.rb-banner-strip .section-title.style2 h2.title {
+    margin-bottom: 0;
+    padding: 0 50px 0 0;
+    font-size: 34px;
+    line-height: 1.25;
+    /* the paragraph runs to four lines — centre the heading against it */
+    vertical-align: middle;
+}
+
+.rb-banner-strip .section-title.style2 p {
+    margin: 0;
+    font-size: 17px;
+    line-height: 1.75;
+    vertical-align: middle;
+}
+
+@media (max-width: 991px) {
+    .rb-banner-strip {
+        padding: 26px 24px;
+    }
+
+    .rb-banner-strip .section-title.style2 h2,
+    .rb-banner-strip .section-title.style2 h2.title {
+        padding: 0 0 14px 0;
+        font-size: 27px;
+    }
+
+    .rb-banner-strip .section-title.style2 p {
+        font-size: 16px;
+    }
+}
+
+/* ---------------------------------------------------------
+   1. Hero banner
+   --------------------------------------------------------- */
+
+.rb-hero {
+    position: relative;
+    overflow: hidden;
+    background-color: var(--rb-ink);
+}
+
+.rb-hero-track {
+    position: relative;
+    height: 560px;
+}
+
+.rb-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .7s ease;
+    text-decoration: none;
+    z-index: 1;
+}
+
+.rb-slide.is-active {
+    opacity: 1;
+    visibility: visible;
+    z-index: 2;
+}
+
+.rb-slide:hover,
+.rb-slide:focus {
+    text-decoration: none;
+}
+
+.rb-slide-bg {
+    position: absolute;
+    inset: 0;
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    transform: scale(1.04);
+    transition: transform 8s ease-out;
+}
+
+.rb-slide.is-active .rb-slide-bg {
+    transform: scale(1);
+}
+
+/* keeps the headline legible over any photograph */
+.rb-slide-bg:after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg,
+            rgba(9, 24, 48, .93) 0%,
+            rgba(9, 24, 48, .86) 32%,
+            rgba(9, 24, 48, .55) 62%,
+            rgba(9, 24, 48, .35) 100%);
+}
+
+.rb-slide .container {
+    position: relative;
+    z-index: 2;
+    height: 100%;
+}
+
+.rb-slide-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    gap: 40px;
+}
+
+/* --- left: the words --- */
+
+.rb-slide-text {
+    flex: 1 1 auto;
+    max-width: 620px;
+    padding: 30px 0;
+}
+
+.rb-eyebrow {
+    display: inline-block;
+    margin-bottom: 18px;
+    padding: 7px 14px;
+    border-left: 3px solid var(--rb-skin);
+    background: rgba(255, 255, 255, .08);
+    color: #a8c8f5;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    line-height: 1;
+}
+
+.rb-slide-title {
+    margin: 0 0 18px;
+    color: #fff;
+    font-size: 52px;
+    line-height: 1.1;
+    font-weight: 700;
+}
+
+.rb-slide-desc {
+    margin: 0 0 30px;
+    max-width: 520px;
+    color: rgba(255, 255, 255, .82);
+    font-size: 17px;
+    line-height: 1.7;
+}
+
+.rb-slide-btn {
+    display: inline-block;
+    padding: 15px 32px;
+    background: var(--rb-skin);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: .5px;
+    text-transform: uppercase;
+    transition: background .3s ease, transform .3s ease;
+}
+
+.rb-slide-btn i {
+    margin-left: 6px;
+    font-size: 11px;
+    vertical-align: middle;
+}
+
+.rb-slide:hover .rb-slide-btn {
+    background: #fff;
+    color: var(--rb-ink);
+}
+
+/* --- right: the picture --- */
+
+.rb-slide-media {
+    flex: 0 0 auto;
+    position: relative;
+    width: 340px;
+    height: 340px;
+    padding: 10px;
+    background: rgba(255, 255, 255, .1);
+    border: 1px solid rgba(255, 255, 255, .25);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, .35);
+}
+
+.rb-slide-media img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.rb-slide-media:before {
+    content: "";
+    position: absolute;
+    left: -14px;
+    bottom: -14px;
+    width: 96px;
+    height: 96px;
+    border-left: 4px solid var(--rb-skin);
+    border-bottom: 4px solid var(--rb-skin);
+}
+
+/* --- controls --- */
+
+.rb-hero-nav {
+    position: absolute;
+    top: 50%;
+    z-index: 6;
+    width: 48px;
+    height: 48px;
+    margin-top: -24px;
+    padding: 0;
+    border: 1px solid rgba(255, 255, 255, .35);
+    background: rgba(9, 24, 48, .35);
+    color: #fff;
+    font-size: 18px;
+    line-height: 46px;
+    cursor: pointer;
+    transition: background .3s ease, border-color .3s ease;
+}
+
+.rb-hero-nav:hover {
+    background: var(--rb-skin);
+    border-color: var(--rb-skin);
+}
+
+.rb-hero-prev {
+    left: 24px;
+}
+
+.rb-hero-next {
+    right: 24px;
+}
+
+.rb-hero-dots {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 26px;
+    z-index: 6;
+    text-align: center;
+}
+
+.rb-hero-dots button {
+    width: 26px;
+    height: 4px;
+    margin: 0 5px;
+    padding: 0;
+    border: 0;
+    background: rgba(255, 255, 255, .4);
+    cursor: pointer;
+    transition: background .3s ease, width .3s ease;
+}
+
+.rb-hero-dots button.is-active {
+    width: 42px;
+    background: #fff;
+}
+
+/* ---------------------------------------------------------
+   2. Contact strip
+   --------------------------------------------------------- */
+
+.rb-contact-strip {
+    background: var(--rb-skin);
+    padding: 34px 0;
+}
+
+.rb-contact-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 24px 50px;
+}
+
+.rb-contact-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    color: #fff;
+}
+
+.rb-contact-item i {
+    flex: 0 0 auto;
+    width: 48px;
+    height: 48px;
+    border: 1px solid rgba(255, 255, 255, .45);
+    font-size: 20px;
+    line-height: 46px;
+    text-align: center;
+}
+
+.rb-contact-item h5 {
+    margin: 0 0 4px;
+    color: rgba(255, 255, 255, .7);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.rb-contact-item p {
+    margin: 0;
+    font-size: 19px;
+    font-weight: 700;
+    line-height: 1.35;
+}
+
+.rb-contact-item a {
+    color: #fff;
+}
+
+.rb-contact-item a:hover {
+    color: #cfe0fb;
+}
+
+.rb-contact-cta {
+    margin-left: auto;
+}
+
+.rb-contact-cta a {
+    display: inline-block;
+    padding: 15px 32px;
+    background: #fff;
+    color: var(--rb-skin);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: .5px;
+    text-transform: uppercase;
+    transition: background .3s ease, color .3s ease;
+}
+
+.rb-contact-cta a:hover {
+    background: var(--rb-ink);
+    color: #fff;
+}
+
+/* ---------------------------------------------------------
+   3. Proof bar  (replaces the old About prose + Mission block)
+   --------------------------------------------------------- */
+
+.rb-proof {
+    padding: 70px 0 65px;
+    background: #f4f7fb;
+}
+
+.rb-proof-head {
+    max-width: 780px;
+    margin: 0 auto 45px;
+    text-align: center;
+}
+
+.rb-proof-head h5 {
+    margin: 0 0 10px;
+    color: var(--rb-skin);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.rb-proof-title {
+    margin: 0;
+    color: var(--rb-ink);
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1.25;
+}
+
+.rb-proof-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.rb-stat {
+    flex: 1 1 200px;
+    padding: 0 24px;
+    border-left: 3px solid var(--rb-skin);
+}
+
+.rb-stat-num {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--rb-ink);
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -1px;
+}
+
+.rb-stat-num sup {
+    font-size: 22px;
+    top: -.6em;
+}
+
+.rb-stat-label {
+    display: block;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.rb-quote {
+    max-width: 900px;
+    margin: 55px auto 0;
+    padding: 0 20px;
+    text-align: center;
+    border: 0;
+}
+
+.rb-quote p {
+    margin: 0 0 16px;
+    color: var(--rb-ink);
+    font-size: 23px;
+    font-style: italic;
+    line-height: 1.6;
+}
+
+.rb-quote cite {
+    display: block;
+    color: #5b6b83;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* ---------------------------------------------------------
+   3b. Capability statement
+   --------------------------------------------------------- */
+
+.rb-capability {
+    padding: 80px 0 85px;
+    background: #fff;
+}
+
+.rb-capability-head {
+    margin-bottom: 45px;
+    text-align: center;
+}
+
+.rb-capability-head h5 {
+    margin: 0 0 8px;
+    color: var(--rb-skin);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.rb-capability-head h2 {
+    margin: 0;
+    font-size: 34px;
+    font-weight: 700;
+}
+
+.rb-capability-head h2:after {
+    content: "";
+    display: block;
+    width: 60px;
+    height: 3px;
+    margin: 18px auto 0;
+    background: var(--rb-skin);
+}
+
+.rb-capability-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 24px;
+}
+
+.rb-capability-item {
+    position: relative;
+    flex: 0 1 340px;
+    padding: 34px 30px 30px;
+    border: 1px solid #e3e9f2;
+    border-top: 3px solid var(--rb-skin);
+    background: #fff;
+    overflow: hidden;
+    transition: box-shadow .3s ease, transform .3s ease;
+}
+
+.rb-capability-item:hover {
+    box-shadow: 0 16px 40px rgba(9, 24, 48, .1);
+    transform: translateY(-4px);
+}
+
+.rb-capability-num {
+    position: absolute;
+    top: 8px;
+    right: 14px;
+    color: #eef2f8;
+    font-size: 60px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -2px;
+}
+
+.rb-capability-item i {
+    position: relative;
+    display: block;
+    margin-bottom: 16px;
+    color: var(--rb-skin);
+    font-size: 30px;
+}
+
+.rb-capability-item p {
+    position: relative;
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+/* ---------------------------------------------------------
+   6. Closing CTA
+   --------------------------------------------------------- */
+
+/* light band: the footer directly below is dark, and two dark bands in a row
+   read as one block */
+.rb-cta {
+    padding: 58px 0 60px;
+    background: #f4f7fb;
+    border-top: 4px solid var(--rb-skin);
+}
+
+.rb-cta-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 30px 50px;
+}
+
+.rb-cta-text {
+    flex: 1 1 480px;
+}
+
+.rb-cta-text h2 {
+    margin: 0 0 10px;
+    color: var(--rb-ink);
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1.25;
+}
+
+.rb-cta-text p {
+    margin: 0;
+    max-width: 620px;
+    font-size: 16px;
+    line-height: 1.7;
+}
+
+.rb-cta-actions {
+    flex: 0 0 auto;
+    text-align: right;
+}
+
+.rb-cta-primary {
+    display: inline-block;
+    padding: 17px 38px;
+    background: var(--rb-skin);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: .5px;
+    text-transform: uppercase;
+    transition: background .3s ease;
+}
+
+.rb-cta-primary:hover {
+    background: var(--rb-ink);
+    color: #fff;
+}
+
+.rb-cta-or {
+    display: block;
+    margin-top: 14px;
+    color: #5b6b83;
+    font-size: 14px;
+}
+
+.rb-cta-or a {
+    color: var(--rb-ink);
+    font-weight: 700;
+}
+
+/* ---------------------------------------------------------
+   4. Technology partners
+   --------------------------------------------------------- */
+
+.rb-partners {
+    padding: 80px 0 90px;
+    background: #fff;
+}
+
+.rb-partners-head {
+    margin-bottom: 45px;
+    text-align: center;
+}
+
+.rb-partners-head h5 {
+    margin: 0 0 8px;
+    color: var(--rb-skin);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.rb-partners-head h2 {
+    margin: 0;
+    font-size: 34px;
+    font-weight: 700;
+}
+
+.rb-partners-head h2:after {
+    content: "";
+    display: block;
+    width: 60px;
+    height: 3px;
+    margin: 18px auto 0;
+    background: var(--rb-skin);
+}
+
+.rb-partner-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+}
+
+.rb-partner {
+    flex: 0 1 540px;
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    padding: 34px 36px;
+    border: 1px solid #e3e9f2;
+    background: #fff;
+    transition: box-shadow .3s ease, transform .3s ease, border-color .3s ease;
+}
+
+.rb-partner:hover {
+    border-color: var(--rb-skin);
+    box-shadow: 0 16px 40px rgba(9, 24, 48, .1);
+    transform: translateY(-4px);
+}
+
+.rb-partner-logo {
+    flex: 0 0 178px;
+    height: 86px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-right: 1px solid #e3e9f2;
+    padding-right: 28px;
+}
+
+.rb-partner-logo img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.rb-partner-word {
+    color: var(--rb-skin);
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.rb-partner-text h4 {
+    margin: 0 0 6px;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.rb-partner-text p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.65;
+}
+
+/* ---------------------------------------------------------
+   5. Responsive
+   --------------------------------------------------------- */
+
+@media (max-width: 1199px) {
+    .rb-hero-track {
+        height: 500px;
+    }
+
+    .rb-slide-title {
+        font-size: 42px;
+    }
+
+    .rb-slide-media {
+        width: 280px;
+        height: 280px;
+    }
+}
+
+@media (max-width: 991px) {
+    .rb-hero-track {
+        height: 460px;
+    }
+
+    .rb-slide-title {
+        font-size: 34px;
+    }
+
+    .rb-slide-desc {
+        font-size: 15px;
+        margin-bottom: 24px;
+    }
+
+    .rb-slide-media {
+        width: 220px;
+        height: 220px;
+    }
+
+    .rb-hero-nav {
+        display: none;
+    }
+
+    .rb-contact-cta {
+        margin-left: 0;
+    }
+
+
+
+
+    .rb-partner {
+        flex: 1 1 100%;
+    }
+
+    .rb-stat,
+    .rb-capability-item {
+        flex: 1 1 100%;
+    }
+
+    .rb-stat {
+        padding-left: 20px;
+    }
+
+    .rb-quote p {
+        font-size: 19px;
+    }
+
+    .rb-proof-title {
+        font-size: 26px;
+    }
+
+    .rb-cta-actions {
+        text-align: left;
+    }
+
+    .rb-cta-text h2 {
+        font-size: 26px;
+    }
+
+}
+
+@media (max-width: 767px) {
+    .rb-hero-track {
+        height: auto;
+        min-height: 420px;
+    }
+
+    .rb-slide {
+        position: relative;
+        display: none;
+        min-height: 420px;
+    }
+
+    .rb-slide.is-active {
+        display: block;
+    }
+
+    .rb-slide-inner {
+        display: block;
+        padding: 60px 0 70px;
+    }
+
+    .rb-slide-media {
+        display: none;
+    }
+
+    .rb-slide-bg:after {
+        background: rgba(9, 24, 48, .82);
+    }
+
+    .rb-slide-title {
+        font-size: 28px;
+    }
+
+    .rb-contact-row {
+        gap: 22px;
+    }
+
+    .rb-contact-item p {
+        font-size: 16px;
+    }
+
+    .rb-partner {
+        display: block;
+        text-align: center;
+    }
+
+    .rb-partner-logo {
+        border-right: 0;
+        border-bottom: 1px solid #e3e9f2;
+        padding: 0 0 18px;
+        margin-bottom: 18px;
+    }
+}
