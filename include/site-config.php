@@ -18,7 +18,7 @@ define('RB_GA4_ID', '');
 // value, not the whole <meta> tag — e.g. for
 //   <meta name="google-site-verification" content="abc123..." />
 // enter  abc123...
-define('RB_GSC_VERIFICATION', '');
+define('RB_GSC_VERIFICATION', '_DKCSYuMn-fdrwKBj9uCecEVL831UPXLcVmHKtYJBEc');
 
 // Hosts on which analytics must never fire, so local testing does not pollute
 // the reporting. Add staging hostnames here too.
