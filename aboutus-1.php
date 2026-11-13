@@ -49,7 +49,7 @@ require_once 'include/page-meta.php';
 
 
 <!-- language switcher + Indic script support -->
-<link rel="stylesheet" type="text/css" href="/css/raybon-i18n.css">
+<link rel="stylesheet" type="text/css" href="/css/raybon-i18n.css?v=20261113">
 </head>
 
 <body>

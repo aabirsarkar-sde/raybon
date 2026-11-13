@@ -47,11 +47,11 @@ require_once 'include/page-meta.php';
 <link rel="stylesheet" type="text/css" href="./contact_files/responsive.css">
 
 <!-- home page (hero banner, contact strip, mission, partners) -->
-<link rel="stylesheet" type="text/css" href="./css/raybon-home.css">
+<link rel="stylesheet" type="text/css" href="./css/raybon-home.css?v=20261113">
 
 
 <!-- language switcher + Indic script support -->
-<link rel="stylesheet" type="text/css" href="/css/raybon-i18n.css">
+<link rel="stylesheet" type="text/css" href="/css/raybon-i18n.css?v=20261113">
 </head>
 
 <body>
