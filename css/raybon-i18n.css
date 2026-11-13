@@ -217,3 +217,76 @@ html[lang="hi"] .ttm-btn, html[lang="gu"] .ttm-btn {
         font-size: 16px;
     }
 }
+
+/* -------------------------------------------------------------
+   Product image grid (home page and product.php). The theme hid each
+   product's name until hover, so the grid read as a photo collage and
+   touch users never saw the names. The name now sits on every tile;
+   hovering turns the bar brand blue and reveals the one-line summary.
+   ------------------------------------------------------------- */
+.featured-item.featured-portfolio-item .ttm-portfolio-box-view-overlay {
+    opacity: 1;
+    background-color: transparent;
+}
+
+.featured-item.featured-portfolio-item:hover .ttm-portfolio-box-view-overlay {
+    background-color: rgba(2, 13, 38, .45);
+}
+
+.featured-item.featured-portfolio-item .content-post.content-portfolio-post {
+    opacity: 1;
+    transform: none;
+    background-color: rgba(9, 24, 48, .78);
+    transition: background-color .3s ease;
+}
+
+.featured-item.featured-portfolio-item:hover .content-post.content-portfolio-post {
+    background-color: #2b5699;
+}
+
+.featured-item.featured-portfolio-item .content-post.content-portfolio-post:before {
+    opacity: 0;
+    transition: opacity .3s ease;
+}
+
+.featured-item.featured-portfolio-item:hover .content-post.content-portfolio-post:before {
+    opacity: 1;
+    border-color: transparent transparent #2b5699 transparent;
+}
+
+.featured-item.featured-portfolio-item .content-post .category {
+    display: block;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height .4s ease, opacity .3s ease, margin-top .4s ease;
+}
+
+.featured-item.featured-portfolio-item:hover .content-post .category {
+    max-height: 90px;
+    margin-top: 6px;
+    opacity: 1;
+}
+
+/* -------------------------------------------------------------
+   Footer link lists. footer.php puts them in two side-by-side columns
+   (Products + Flocculant Brands, then Plants & Systems + Areas We Serve).
+   At half width the theme's two-column "tree" layout for Our Products
+   wrapped every name, so it becomes a plain list like the other three.
+   ------------------------------------------------------------- */
+.widget ul#menu-footer-services li,
+.widget ul#menu-footer-services li:nth-child(even) {
+    display: block;
+    width: auto;
+    margin-left: 0;
+    padding: 0 0 15px 0;
+}
+
+.widget ul#menu-footer-services li a {
+    padding-left: 0;
+}
+
+.widget ul#menu-footer-services li a:before,
+.widget ul#menu-footer-services li a:after {
+    content: none;
+}

@@ -34,7 +34,7 @@
          <div class="second-footer ttm-textcolor-dark">
             <div class="container">
                 <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-6 widget-area">
+                    <div class="col-xs-12 col-sm-12 col-lg-6 widget-area">
                         <div class="widget style2 widget-out-link clearfix">
                             <div class="footer-logo">
                                 <img id="footer-logo-img" class="img-center" src="/images/Raybon Logo.png" alt="Raybon Chemicals & Allied Products logo">
@@ -48,7 +48,9 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="col-xs-12 col-sm-12 col-md-6 widget-area">
+                    <div class="col-xs-12 col-sm-12 col-lg-6 widget-area">
+                      <div class="row">
+                      <div class="col-sm-6">
 						<div class="widget style2 widget-out-link clearfix">
                            <h3 class="widget-title"><?php te('footer.products.title'); ?></h3>
                             <ul id="menu-footer-services">
@@ -80,6 +82,8 @@
                                 <li><a href="afranil.php">Afranil Antifoam</a></li>
                             </ul>
                         </div>
+                      </div>
+                      <div class="col-sm-6">
                         <div class="widget style2 widget-out-link clearfix">
                            <h3 class="widget-title">Plants &amp; Systems</h3>
                             <ul id="menu-footer-plants">
@@ -100,6 +104,8 @@
                                 <li><a href="water-treatment-chemicals-surat.php">Water Treatment Chemicals in Surat</a></li>
                             </ul>
                         </div>
+                      </div>
+                      </div><!-- row end -->
                         <!--<div class="widget style2 widget-out-link clearfix">-->
                         <!--   <h3 class="widget-title">Newsletter</h3>-->
                         <!--   <p>Subscribe to our newsletter to receive latest news on our services.</p>-->
