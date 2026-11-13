@@ -114,6 +114,7 @@ return [
     'home.cta.body' => 'We will jar-test them in our laboratory and come back with a chemical program and a dosage &mdash; before you commit to anything.',
     'home.cta.primary' => 'Request a Jar Test',
     'home.hero.knowmore' => 'Know More',
+    'home.hero.upnext' => 'Up next',
     'home.why.title' => 'Why<strong>Choose Us</strong>',
 
     // ---- Contact page ---------------------------------------

@@ -47,7 +47,7 @@ require_once 'include/page-meta.php';
 <link rel="stylesheet" type="text/css" href="./contact_files/responsive.css">
 
 <!-- home page (hero banner, contact strip, mission, partners) -->
-<link rel="stylesheet" type="text/css" href="./css/raybon-home.css?v=20261113">
+<link rel="stylesheet" type="text/css" href="./css/raybon-home.css?v=20261113b">
 
 
 <!-- language switcher + Indic script support -->
@@ -158,6 +158,12 @@ require_once 'include/page-meta.php';
             <button type="button" class="rb-hero-nav rb-hero-prev" aria-label="Previous slide"><i class="fa fa-angle-left"></i></button>
             <button type="button" class="rb-hero-nav rb-hero-next" aria-label="Next slide"><i class="fa fa-angle-right"></i></button>
             <div class="rb-hero-dots" id="rb-hero-dots"></div>
+            <!-- warp ring of product cards across the whole hero; js/rb-warp.js fills it on desktops with WebGL2 -->
+            <div class="rb-warp" id="rb-warp"></div>
+            <button type="button" class="rb-upnext" id="rb-upnext">
+                <span class="rb-upnext-label"><?php th('home.hero.upnext'); ?></span>
+                <span class="rb-upnext-name" id="rb-upnext-name"></span>
+            </button>
         </section>
         <!--hero-banner end-->
 
@@ -619,6 +625,7 @@ require_once 'include/page-meta.php';
     <script src="js/jquery.prettyPhoto.js"></script>
     <script src="js/numinate.min6959.js?ver=4.9.3"></script>
     <script src="js/main.js"></script>
+    <script src="js/rb-warp.js?v=20261113c"></script>
 
     <!-- Home hero banner -->
     <script>
@@ -647,16 +654,37 @@ require_once 'include/page-meta.php';
             })(i);
         }
 
-        function go(index) {
+        var ring = null;
+
+        // "Up next": the side cards are turned too far to read, so the next
+        // product's name sits in plain text under the right-hand card.
+        var upnext = document.getElementById('rb-upnext');
+        var upnextName = document.getElementById('rb-upnext-name');
+        function placeUpNext() {
+            var a = ring.anchor(1);
+            upnext.style.left = a.x + 'px';
+            upnext.style.top = (warpEl.offsetTop + a.bottom + 14) + 'px';
+        }
+        function showUpNext() {
+            var n = slides[(current + 1) % slides.length].querySelector('.rb-slide-title');
+            upnextName.textContent = n ? n.textContent.trim() : '';
+            placeUpNext();
+            upnext.className = 'rb-upnext is-shown';
+        }
+
+        // dir: +1/-1 tells the ring which way to turn; fromRing skips telling it at all
+        function go(index, dir, fromRing) {
             current = (index + slides.length) % slides.length;
             for (var i = 0; i < slides.length; i++) {
                 slides[i].className = 'rb-slide' + (i === current ? ' is-active' : '');
                 dots[i].className = (i === current ? 'is-active' : '');
             }
+            if (ring) { upnext.className = 'rb-upnext'; }
+            if (ring && !fromRing) { ring.go(current, dir); }
         }
 
-        function next() { go(current + 1); }
-        function prev() { go(current - 1); }
+        function next() { go(current + 1, 1); }
+        function prev() { go(current - 1, -1); }
         function start() { timer = setInterval(next, INTERVAL); }
         function stop() { clearInterval(timer); }
         function restart() { stop(); start(); }
@@ -665,6 +693,36 @@ require_once 'include/page-meta.php';
         hero.querySelector('.rb-hero-prev').onclick = function () { prev(); restart(); };
         hero.onmouseenter = stop;
         hero.onmouseleave = start;
+
+        // Desktop: the whole hero becomes a warp ring of product cards that turns with the slides.
+        var warpEl = document.getElementById('rb-warp');
+        if (warpEl && window.RbWarp && window.matchMedia('(min-width: 992px)').matches) {
+            var cards = [];
+            for (var j = 0; j < slides.length; j++) {
+                var txt = function (sel) {
+                    var n = slides[j].querySelector(sel);
+                    return n ? n.textContent.replace(/\s+/g, ' ').trim() : '';
+                };
+                cards.push({
+                    img: slides[j].querySelector('.rb-slide-media img'),
+                    eyebrow: txt('.rb-eyebrow'),
+                    title: txt('.rb-slide-title'),
+                    desc: txt('.rb-slide-desc'),
+                    more: txt('.rb-slide-btn')
+                });
+            }
+            ring = window.RbWarp.init(warpEl, cards, {
+                onPick: function (index, dir) { go(index, dir, true); restart(); },
+                onOpen: function () { window.location.href = slides[current].getAttribute('href'); },
+                onSettle: showUpNext
+            });
+            if (ring) {
+                hero.className += ' rb-hero--warp';
+                showUpNext();
+                window.addEventListener('resize', placeUpNext);
+                upnext.onclick = function () { next(); restart(); };
+            }
+        }
 
         start();
     })();

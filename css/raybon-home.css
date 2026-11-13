@@ -726,6 +726,117 @@ body .page .site-main > .ttm-row.portfolio-section2:first-child {
     line-height: 1.65;
 }
 
+/* --- warp ring (js/rb-warp.js) ---
+   On desktops with WebGL2 the script adds .rb-hero--warp and the whole
+   hero becomes a ring of product cards (photo, category, name, summary,
+   Know more) running edge to edge. Each slide's text stays in the HTML
+   for search engines and screen readers but is hidden from view. The
+   slide photos still cross-fade behind the ring, darkened evenly.
+   Without WebGL2, or below 992px, the plain hero stays. */
+
+.rb-warp {
+    display: none;
+    position: absolute;
+    top: 34px; /* clear the nav bar that overlaps the hero */
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 5;
+    cursor: grab;
+    touch-action: pan-y;
+    user-select: none;
+}
+
+.rb-warp:active {
+    cursor: grabbing;
+}
+
+.rb-warp canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.rb-hero--warp .rb-warp {
+    display: block;
+}
+
+.rb-hero--warp .rb-hero-track {
+    height: 580px;
+}
+
+.rb-hero--warp .rb-slide-bg:after {
+    background: rgba(9, 24, 48, .84);
+}
+
+.rb-hero--warp .rb-slide-inner {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+.rb-hero--warp .rb-hero-dots {
+    bottom: 12px;
+}
+
+/* "Up next" under the right-hand card; the script places it and fades it
+   in once the ring is most of the way round. */
+.rb-upnext {
+    display: none;
+    position: absolute;
+    z-index: 6;
+    padding: 4px 10px;
+    border: 0;
+    background: none;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    cursor: pointer;
+    opacity: 0;
+    text-shadow: 0 1px 8px rgba(9, 24, 48, .9), 0 0 2px rgba(9, 24, 48, .8);
+    transform: translate(-50%, 6px);
+    transition: opacity .35s ease, transform .35s ease;
+}
+
+.rb-hero--warp .rb-upnext {
+    display: block;
+}
+
+.rb-upnext.is-shown {
+    opacity: 1;
+    transform: translate(-50%, 0);
+}
+
+.rb-upnext-label {
+    display: block;
+    margin-bottom: 3px;
+    color: #a8c8f5;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.rb-upnext-name {
+    font-size: 19px;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.rb-upnext-name:after {
+    content: " \203A";
+    color: #6fa8ff;
+}
+
+.rb-upnext:hover .rb-upnext-name,
+.rb-upnext:focus .rb-upnext-name {
+    text-decoration: underline;
+}
+
 /* ---------------------------------------------------------
    5. Responsive
    --------------------------------------------------------- */
@@ -733,6 +844,10 @@ body .page .site-main > .ttm-row.portfolio-section2:first-child {
 @media (max-width: 1199px) {
     .rb-hero-track {
         height: 430px;
+    }
+
+    .rb-hero--warp .rb-hero-track {
+        height: 540px;
     }
 
     .rb-slide-title {
@@ -748,6 +863,35 @@ body .page .site-main > .ttm-row.portfolio-section2:first-child {
 @media (max-width: 991px) {
     .rb-hero-track {
         height: 400px;
+    }
+
+    /* Below 992px the script never starts the ring; this guards a desktop
+       window that is later narrowed. */
+    .rb-hero--warp .rb-warp,
+    .rb-hero--warp .rb-upnext {
+        display: none;
+    }
+
+    .rb-hero--warp .rb-hero-track {
+        height: 400px;
+    }
+
+    .rb-hero--warp .rb-slide-inner {
+        position: static;
+        width: auto;
+        height: 100%;
+        overflow: visible;
+        clip: auto;
+        clip-path: none;
+        white-space: normal;
+    }
+
+    .rb-hero--warp .rb-slide-bg:after {
+        background: linear-gradient(90deg,
+                rgba(9, 24, 48, .93) 0%,
+                rgba(9, 24, 48, .86) 32%,
+                rgba(9, 24, 48, .55) 62%,
+                rgba(9, 24, 48, .35) 100%);
     }
 
     .rb-slide-title {
