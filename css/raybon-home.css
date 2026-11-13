@@ -82,7 +82,7 @@ body .page .site-main > .ttm-row.portfolio-section2:first-child {
 
 .rb-hero-track {
     position: relative;
-    height: 560px;
+    height: 460px;
 }
 
 .rb-slide {
@@ -216,8 +216,8 @@ body .page .site-main > .ttm-row.portfolio-section2:first-child {
 .rb-slide-media {
     flex: 0 0 auto;
     position: relative;
-    width: 340px;
-    height: 340px;
+    width: 300px;
+    height: 300px;
     padding: 10px;
     background: rgba(255, 255, 255, .1);
     border: 1px solid rgba(255, 255, 255, .25);
@@ -732,7 +732,7 @@ body .page .site-main > .ttm-row.portfolio-section2:first-child {
 
 @media (max-width: 1199px) {
     .rb-hero-track {
-        height: 500px;
+        height: 430px;
     }
 
     .rb-slide-title {
@@ -747,7 +747,7 @@ body .page .site-main > .ttm-row.portfolio-section2:first-child {
 
 @media (max-width: 991px) {
     .rb-hero-track {
-        height: 460px;
+        height: 400px;
     }
 
     .rb-slide-title {

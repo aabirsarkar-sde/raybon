@@ -197,3 +197,23 @@ html[lang="hi"] h3, html[lang="gu"] h3,
 html[lang="hi"] .ttm-btn, html[lang="gu"] .ttm-btn {
     letter-spacing: normal;
 }
+
+/* -------------------------------------------------------------
+   Header scale (desktop). This file loads on every page, so the header
+   sizing lives here. The theme's 70px logo and 17px menu looked small
+   against the home hero, so both are bumped up a step.
+   ------------------------------------------------------------- */
+@media only screen and (min-width: 1200px) {
+    .site-branding img {
+        max-height: 82px;
+    }
+
+    #site-header-menu #site-navigation .menu ul.dropdown > li > a {
+        font-size: 19px;
+    }
+
+    .ttm-header-style-infostack .ttm-custombutton a,
+    .ttm-rt-contact .rb-langswitch {
+        font-size: 16px;
+    }
+}
